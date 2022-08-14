@@ -1,4 +1,4 @@
-# react-app-viewer
+# react-repo-viewer
 
 Basic viewer for searching and traversing through the React repos
 
