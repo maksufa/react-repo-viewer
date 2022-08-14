@@ -6,8 +6,9 @@ import { useQuery } from "@apollo/client";
 import { usePrevious, useUpdateEffect } from "react-use";
 import { ColumnsType } from "antd/lib/table";
 import styled from "styled-components";
+import { ForkOutlined, StarTwoTone } from "@ant-design/icons";
 import { GET_GITHUB_REPOS } from "./queries/queries";
-import { PAGE_SIZE } from "./utils/constants";
+import { PAGE_SIZE, STARS_COLOR } from "./utils/constants";
 
 // those interfaces are copied from GitHub public schema https://docs.github.com/en/graphql/overview/public-schema for the purpose of this task,
 // however normally it's good to keep schema inside the app and transform it (GQL types) to TS e.g. using https://github.com/dotansimha/graphql-code-generator;
@@ -61,11 +62,21 @@ const COLUMNS: ColumnsType<INode> = [
     title: "Stars",
     dataIndex: "stargazerCount",
     key: "stargazerCount",
+    render: (text: string) => (
+      <div>
+        <StarTwoTone twoToneColor={STARS_COLOR} /> {text}
+      </div>
+    ),
   },
   {
     title: "Forks",
     dataIndex: "forkCount",
     key: "forkCount",
+    render: (text: string) => (
+      <div>
+        <ForkOutlined /> {text}
+      </div>
+    ),
   },
 ];
 
