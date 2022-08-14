@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# react-app-viewer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Basic viewer for searching and traversing through the React reps
 
 ## Available Scripts
 
@@ -39,8 +39,16 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Docker
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To run app in the Docker container:
+
+### ` docker build -t react-repo-viewer .` in the project dir
+
+and then:
+
+## TBD:
+1. Add more unit tests
+2. Fix problem with not working hot-reloading when running app in the docker container
+3. Add git hooks (e.g. husky) to the project 
