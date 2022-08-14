@@ -9,6 +9,7 @@
   "rules": {
     "prettier/prettier": ["error", {
       "endOfLine":"auto"
-    }]
+    }],
+    "import/prefer-default-export": 0
   }
 }
