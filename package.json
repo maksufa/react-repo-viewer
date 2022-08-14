@@ -1,7 +1,7 @@
 {
   "name": "react-repo-viewer",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@apollo/client": "^3.6.9",
