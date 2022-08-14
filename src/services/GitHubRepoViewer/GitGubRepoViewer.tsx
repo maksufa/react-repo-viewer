@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 
 import { usePrevious, useUpdateEffect } from "react-use";
 import { ColumnsType } from "antd/lib/table";
+import styled from "styled-components";
 import { GET_GITHUB_REPOS } from "./queries/queries";
 import { PAGE_SIZE } from "./utils/constants";
 
@@ -33,6 +34,22 @@ interface INode {
   forkCount: number;
   stargazerCount: number;
 }
+
+// hide interactive elements which work only with offset-based pagination
+export const StyledTable = styled(Table)`
+  .ant-pagination-item,
+  .ant-pagination-jump-next,
+  .ant-pagination-jump-prev {
+    display: none;
+  }
+
+  .ant-pagination-item-active {
+    display: initial;
+    pointer-events: none;
+  }
+
+  max-width: 800px;
+`;
 
 const COLUMNS: ColumnsType<INode> = [
   {
@@ -97,7 +114,7 @@ function App() {
   }, [currentPageNumber]);
 
   return (
-    <Table
+    <StyledTable
       pagination={
         data && {
           total:
@@ -113,7 +130,7 @@ function App() {
         ...n.node,
         key: n.node.id,
       }))}
-      columns={COLUMNS}
+      columns={COLUMNS as object[]}
     />
   );
 }
