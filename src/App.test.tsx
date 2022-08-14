@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import App from "./services/GitGubRepoList";
+import App from "./services/GitHubRepoViewer/GitGubRepoViewer";
 
 test("renders learn react link", () => {
   render(<App />);
