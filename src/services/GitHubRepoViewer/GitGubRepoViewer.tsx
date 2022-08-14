@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
-import { Table } from "antd";
+import { Table, Anchor } from "antd";
 import { useQuery } from "@apollo/client";
 
 import { usePrevious, useUpdateEffect } from "react-use";
 import { ColumnsType } from "antd/lib/table";
 import styled from "styled-components";
 import { ForkOutlined, StarTwoTone } from "@ant-design/icons";
+// We might want to setup relative root folder for the imports,
+// but auto-imports (when typing) in VSC make it IMO a way easier
 import { GET_GITHUB_REPOS } from "./queries/queries";
 import { PAGE_SIZE, STARS_COLOR } from "./utils/constants";
 import FilterDropdown from "./components/FilterDropdown";
+
+const { Link } = Anchor;
 
 // those interfaces are copied from GitHub public schema https://docs.github.com/en/graphql/overview/public-schema for the purpose of this task,
 // however normally it's good to keep schema inside the app and transform it (GQL types) to TS e.g. using https://github.com/dotansimha/graphql-code-generator;
@@ -53,7 +57,7 @@ export const StyledTable = styled(Table)`
   max-width: 800px;
 `;
 
-function App() {
+function GitGubRepoViewer() {
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
   const previousPageNumber = usePrevious(currentPageNumber);
   const [{ after, before, first, last }, setCursor] = useState<{
@@ -70,6 +74,15 @@ function App() {
       dataIndex: "name",
       key: "name",
       filterDropdown: <FilterDropdown setSearchQuery={setSearchQuery} />,
+      render: (text: string, record: INode) => (
+        <Anchor>
+          <Link
+            target="_blank"
+            href={`https:/github.com/${record.resourcePath}`}
+            title={text}
+          />
+        </Anchor>
+      ),
     },
     {
       title: "Stars",
@@ -149,4 +162,4 @@ function App() {
   );
 }
 
-export default App;
+export default GitGubRepoViewer;
