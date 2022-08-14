@@ -58,4 +58,5 @@ and then:
 ## TBD:
 1. Add more unit tests
 2. Fix problem with not working hot-reloading when running app in the docker container
-3. Add git hooks (e.g. husky) to the project 
+3. Add git hooks (e.g. husky) to the project
+4. Add GitHub Auth to avoid passing manually PATs
