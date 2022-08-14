@@ -1,6 +1,11 @@
 # react-app-viewer
 
-Basic viewer for searching and traversing through the React reps
+Basic viewer for searching and traversing through the React repos
+
+## How to run?
+
+1. Generate GitHub Personal Access Token and paste it in _ApolloClientSetup.ts_ file (Bearer Auth)
+2. Run it directly (see available scripts below) or with Docker
 
 ## Available Scripts
 
@@ -47,6 +52,8 @@ To run app in the Docker container:
 ### ` docker build -t react-repo-viewer .` in the project dir
 
 and then:
+
+### docker run -p 3000:3000 react-repo-viewer
 
 ## TBD:
 1. Add more unit tests
