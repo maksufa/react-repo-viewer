@@ -135,7 +135,6 @@ function App() {
           total:
             parseInt((data.search.repositoryCount / PAGE_SIZE).toString(), 10) +
             1,
-          pageSize: PAGE_SIZE,
           onChange: setCurrentPageNumber,
           current: currentPageNumber,
         }
