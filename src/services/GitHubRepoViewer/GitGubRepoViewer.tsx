@@ -9,6 +9,7 @@ import styled from "styled-components";
 import { ForkOutlined, StarTwoTone } from "@ant-design/icons";
 import { GET_GITHUB_REPOS } from "./queries/queries";
 import { PAGE_SIZE, STARS_COLOR } from "./utils/constants";
+import FilterDropdown from "./components/FilterDropdown";
 
 // those interfaces are copied from GitHub public schema https://docs.github.com/en/graphql/overview/public-schema for the purpose of this task,
 // however normally it's good to keep schema inside the app and transform it (GQL types) to TS e.g. using https://github.com/dotansimha/graphql-code-generator;
@@ -52,34 +53,6 @@ export const StyledTable = styled(Table)`
   max-width: 800px;
 `;
 
-const COLUMNS: ColumnsType<INode> = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-  },
-  {
-    title: "Stars",
-    dataIndex: "stargazerCount",
-    key: "stargazerCount",
-    render: (text: string) => (
-      <div>
-        <StarTwoTone twoToneColor={STARS_COLOR} /> {text}
-      </div>
-    ),
-  },
-  {
-    title: "Forks",
-    dataIndex: "forkCount",
-    key: "forkCount",
-    render: (text: string) => (
-      <div>
-        <ForkOutlined /> {text}
-      </div>
-    ),
-  },
-];
-
 function App() {
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
   const previousPageNumber = usePrevious(currentPageNumber);
@@ -89,6 +62,36 @@ function App() {
     first: null | number;
     last: null | number;
   }>({ after: null, before: null, first: PAGE_SIZE, last: null });
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const COLUMNS: ColumnsType<INode> = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      filterDropdown: <FilterDropdown setSearchQuery={setSearchQuery} />,
+    },
+    {
+      title: "Stars",
+      dataIndex: "stargazerCount",
+      key: "stargazerCount",
+      render: (text: string) => (
+        <div>
+          <StarTwoTone twoToneColor={STARS_COLOR} /> {text}
+        </div>
+      ),
+    },
+    {
+      title: "Forks",
+      dataIndex: "forkCount",
+      key: "forkCount",
+      render: (text: string) => (
+        <div>
+          <ForkOutlined /> {text}
+        </div>
+      ),
+    },
+  ];
 
   // normally it would be also good to add support for errors when fetching the data (param 'error')
   const { loading, data } = useQuery<ISearchResultItemConnection>(
@@ -99,6 +102,7 @@ function App() {
         before,
         first,
         last,
+        query: `react in:name ${searchQuery} in:name`,
       },
     }
   );

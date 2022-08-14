@@ -6,9 +6,10 @@ export const GET_GITHUB_REPOS = gql`
     $before: String
     $first: Int
     $last: Int
+    $query: String!
   ) {
     search(
-      query: "react in: name"
+      query: $query
       type: REPOSITORY
       first: $first
       last: $last
